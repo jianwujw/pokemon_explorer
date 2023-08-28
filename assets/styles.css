@@ -13,9 +13,11 @@ body{
 }
 
 #title{
-position:absolute;
-top:0vh;
-left:1vh;
 font-family:RobotoLight;
 font-size:8vh;
+}
+#navbar{
+top:0vh;
+left:1vh;
+border-bottom:solid .2vh black;
 }
