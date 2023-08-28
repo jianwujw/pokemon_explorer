@@ -1,4 +1,4 @@
 from django.shortcuts import render
 def index(request):
-    return render(request,'pokemons/index.html')
+    return render(request,'index.html')
 # Create your views here.
