@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from pokemons_zbottom.models import *
+from poke_app.pokemons_zbottom.models import *
 import requests
 
 class Comamnd(BaseCommand):
@@ -14,8 +14,8 @@ class Comamnd(BaseCommand):
 
             if response.status_code ==200:
                 data= response.json()
-                Pokemon.objects.create(name = data['name'])
-                
+                #Pokemon.objects.create(**data)
+                print(data)
             else:
                 print("Request failed", response.status_code)
             
