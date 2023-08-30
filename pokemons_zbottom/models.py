@@ -14,7 +14,7 @@ class Pokemon(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=30)
     level = models.PositiveIntegerField()    
-    id = models.PositiveIntegerField()
+    id = models.PositiveIntegerField(primary_key=True)
     height = models.PositiveIntegerField()
     weight = models.PositiveIntegerField()
     abilities = models.ManyToManyField(Abilities)
