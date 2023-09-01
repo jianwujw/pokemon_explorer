@@ -1,3 +1,5 @@
+# run through the api to find how many pokemons there are total
+
 import requests
 
 page = 1

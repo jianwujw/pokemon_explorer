@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand
-from pokemons_zbottom import *
+from pokemons_zbottom.models import Pokemon
 import requests
+import time
+import sqlite3
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -11,11 +13,14 @@ class Command(BaseCommand):
 
             if response.status_code ==200:
                 data= response.json()
-                #Pokemon.objects.create(**data)
+
+                Pokemon.objects.create(**data)
                 
-                print(data['name'])
+                print(data['id'],data['name'])
             else:
-                print("Request failed", response.status_code)
+                print(pokemon,"Request failed", response.status_code)
+            
+            time.sleep(1)
         self.stdout.write(self.style.SUCCESS('Custom command executed successfully'))
 
             
