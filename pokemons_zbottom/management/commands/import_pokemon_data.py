@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from pokemons_zbottom.models import Pokemon
+from pokemons_zbottom.models import *
 import requests
 import time
 import sqlite3
@@ -12,15 +12,35 @@ class Command(BaseCommand):
             response = requests.get(url)
 
             if response.status_code ==200:
+                Pokemon.objects.all().delete()
                 data= response.json()
-
-                Pokemon.objects.create(**data)
+                abilities_set = data.pop('abilities',[])
+                moves = data.pop('moves',[])
+               # move_set = data.pop('moves',[])
+                new_pokemon = Pokemon.objects.create(
+                    name = data['name'],
+                    types = data['types'],
+                    id = data['id'],
+                    height = data['height'],
+                    weight = data['weight'],
+                    #abilities = data['abilities'],
+                    #moves = data['moves'],
+                    #image_url = data['image_url']
+                    )
                 
-                print(data['id'],data['name'])
+                for ability in abilities_set:
+                    ability_name = Abilities.objects.create(name=ability)
+                    new_pokemon.abilities.add(ability_name)
+                for move in moves:
+                    move_name = Moves.objects.create(name=move)
+                    new_pokemon.moves.add(move_name)
+
+   
+
+
+                
             else:
                 print(pokemon,"Request failed", response.status_code)
-            
-            time.sleep(1)
         self.stdout.write(self.style.SUCCESS('Custom command executed successfully'))
 
             
