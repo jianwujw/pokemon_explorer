@@ -17,7 +17,7 @@ class Command(BaseCommand):
                # move_set = data.pop('moves',[])
                 new_pokemon = Pokemon.objects.create(
                     name = data['name'],
-                    types = data['types'],
+                    #types = data['types'][0]['type']['name'],
                     id = data['id'],
                     height = data['height'],
                     weight = data['weight'],
@@ -25,6 +25,13 @@ class Command(BaseCommand):
                     )
                 moves = data['moves']
                 abilities_set = data['abilities']
+                self.stdout.write(data['types'][0]['type']['name'])
+                types = data['types']
+
+                for type in types:
+                    new_pokemon.types.add(Type.objects.create(name = type['type']['name']))
+                    new_pokemon.save()
+                    
 
                 for ability in abilities_set:                   
                     ability_name = ability['ability']['name']
@@ -37,12 +44,9 @@ class Command(BaseCommand):
                     new_pokemon.save()
 
 
-                self.stdout.write(self.style.SUCCESS(f'ID: {new_pokemon.id} Name: {new_pokemon.name} added. Moves: {", ".join(move.name for move in new_pokemon.moves.all())}'))
+                self.stdout.write(self.style.SUCCESS(f'ID: {new_pokemon.id} Name: {new_pokemon.name} added. Types: {", ".join(type.name for type in new_pokemon.types.all())}'))
 
-   
-
-
-                
+               
             else:
                 print(pokemon,"Request failed", response.status_code)
         self.stdout.write(self.style.SUCCESS('Custom command executed successfully'))

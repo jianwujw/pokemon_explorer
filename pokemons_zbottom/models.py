@@ -9,10 +9,13 @@ class Abilities(models.Model):
 class Moves(models.Model):
     name = models.CharField(max_length=100)
 
+class Type(models.Model):
+    name = models.CharField(max_length=100)
+
 
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)
-    types = models.CharField(max_length=30)  
+    types = models.ManyToManyField(Type)  
     id = models.PositiveIntegerField(primary_key=True)
     height = models.PositiveIntegerField()
     weight = models.PositiveIntegerField()
