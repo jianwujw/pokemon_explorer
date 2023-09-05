@@ -6,7 +6,10 @@ import time
 class Command(BaseCommand):
     def handle(self, *args, **options):
         db = Pokemon.objects.all()
+        
+        for stuff in db:           
+            self.stdout.write(self.style.SUCCESS(f'ID: {stuff.id}, Name: {stuff.name} Moves: {", ".join(move.name for move in stuff.moves.all())}'))
+        
 
-        for items in db:
-            print(items)
-        self.stdout.write(self.style.SUCCESS('Custom command executed successfully'))
+        
+        

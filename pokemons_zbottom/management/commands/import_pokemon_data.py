@@ -7,15 +7,13 @@ import sqlite3
 class Command(BaseCommand):
     def handle(self, *args, **options):
         pokemon_count = 1281
+        Pokemon.objects.all().delete()
         for pokemon in range(1,pokemon_count):
             url = f'https://pokeapi.co/api/v2/pokemon/{pokemon}'
-            response = requests.get(url)
-
-            if response.status_code ==200:
-                Pokemon.objects.all().delete()
+            response = requests.get(url)           
+            if response.status_code ==200:              
                 data= response.json()
-                abilities_set = data.pop('abilities',[])
-                moves = data.pop('moves',[])
+                
                # move_set = data.pop('moves',[])
                 new_pokemon = Pokemon.objects.create(
                     name = data['name'],
@@ -23,17 +21,23 @@ class Command(BaseCommand):
                     id = data['id'],
                     height = data['height'],
                     weight = data['weight'],
-                    #abilities = data['abilities'],
-                    #moves = data['moves'],
-                    #image_url = data['image_url']
+                    image_url = data['sprites']['front_default']
                     )
-                
-                for ability in abilities_set:
-                    ability_name = Abilities.objects.create(name=ability)
-                    new_pokemon.abilities.add(ability_name)
+                moves = data['moves']
+                abilities_set = data['abilities']
+
+                for ability in abilities_set:                   
+                    ability_name = ability['ability']['name']
+                    new_pokemon.abilities.add(Abilities.objects.create(name=ability_name))
+                    new_pokemon.save()
                 for move in moves:
-                    move_name = Moves.objects.create(name=move)
-                    new_pokemon.moves.add(move_name)
+                    move_name = move['move']['name']
+                    new_pokemon.moves.add(Moves.objects.create(name=move_name))
+                    self.stdout.write(move_name)
+                    new_pokemon.save()
+
+
+                self.stdout.write(self.style.SUCCESS(f'ID: {new_pokemon.id} Name: {new_pokemon.name} added. Moves: {", ".join(move.name for move in new_pokemon.moves.all())}'))
 
    
 
