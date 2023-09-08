@@ -25,7 +25,6 @@ class Command(BaseCommand):
                     )
                 moves = data['moves']
                 abilities_set = data['abilities']
-                self.stdout.write(data['types'][0]['type']['name'])
                 types = data['types']
 
                 for type in types:
@@ -39,7 +38,11 @@ class Command(BaseCommand):
                     new_pokemon.save()
                 for move in moves:
                     move_name = move['move']['name']
-                    new_pokemon.moves.add(Moves.objects.create(name=move_name))
+                    level_learned = move['version_group_details'][0]['level_learned_at']
+                    move_learn_method = move['version_group_details'][0]['move_learn_method']['name']
+                    new_pokemon.moves.add(Moves.objects.create(name=move_name,level_learned=level_learned,move_learn_method=MovesMethod.objects.create(name=move_learn_method)))
+
+                    
                     self.stdout.write(move_name)
                     new_pokemon.save()
 

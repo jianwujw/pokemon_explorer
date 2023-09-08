@@ -20,8 +20,15 @@
             </div>
             <h3>Moves</h3>
             {%for move in pokemon.moves.all%}
-                {{move.name}}
+                <li>
+                    {{move.name}}
+                    {{move.level_learned}}
+                    {{move.move_learn_method.name}}
+                </li>
             {%endfor%}
+
+
+
 
             <h3>Abilities</h3>
             {%for ability in pokemon.abilities.all%}
