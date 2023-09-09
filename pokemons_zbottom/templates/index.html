@@ -18,13 +18,36 @@
                     <div>{{type.name}}</div>
                 {%endfor%}
             </div>
+
             <h3>Moves</h3>
-            {%for move in pokemon.moves.all%}
+            {%for move in ordered_moves.all%} 
+                {%if move.move_learn_method.name == 'level-up'%}
                 <li>
                     {{move.name}}
                     {{move.level_learned}}
                     {{move.move_learn_method.name}}
                 </li>
+                {%endif%}
+            {%endfor%}   
+
+            {%for move in pokemon.moves.all%} 
+                {%if move.move_learn_method.name == 'tutor'%}
+                <li>
+                    {{move.name}}
+                    {{move.level_learned}}
+                    {{move.move_learn_method.name}}
+                </li>
+                {%endif%}
+            {%endfor%}
+
+            {%for move in pokemon.moves.all%}   
+                {%if move.move_learn_method.name == 'egg'%}
+                <li>
+                    {{move.name}}
+                    {{move.level_learned}}
+                    {{move.move_learn_method.name}}
+                </li>
+                {%endif%}
             {%endfor%}
 
 
