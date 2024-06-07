@@ -2,16 +2,14 @@
     {%load static%}
     <link rel="icon" href="{%static 'favicon.ico' %}">
 </head>
-<style>
-    @import url("../../assets/styles.css");
-</style>
+
 <body>
     <div id="navbar">
         <a href="main.html"><div id="title">Pokèmans</div></a>
         <a href="mons.html"><div class="smallnav">Pokèmon</div></a>
         <a href="moves.html"><div class="smallnav">Movès</div></a>
         <a href="abilities.html"><div class="smallnav">Abilitiès</div></a>
-
+        
         {%for pokemon in pokemons%}
             <div>
                 <img src="{{pokemon.image_url}}">
@@ -21,7 +19,7 @@
                 {%endfor%}
             </div>
 
-            <h3>Moves</h3>
+            <!-- <h3>Moves</h3>
             {%for move in ordered_moves.all%} 
                 {%if move.move_learn_method.name == 'level-up'%}
                 <li>
@@ -58,7 +56,7 @@
             <h3>Abilities</h3>
             {%for ability in pokemon.abilities.all%}
                 {{ability.name}}
-            {%endfor%}
+            {%endfor%} -->
             
         {%endfor%}
  
