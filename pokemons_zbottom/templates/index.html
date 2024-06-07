@@ -1,65 +1,35 @@
 <head>
     {%load static%}
     <link rel="icon" href="{%static 'favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{%static 'css/styles.css'%}">
 </head>
 
 <body>
-    <div id="navbar">
-        <a href="main.html"><div id="title">Pokèmans</div></a>
-        <a href="mons.html"><div class="smallnav">Pokèmon</div></a>
-        <a href="moves.html"><div class="smallnav">Movès</div></a>
-        <a href="abilities.html"><div class="smallnav">Abilitiès</div></a>
+    <!-- <div id="navbar">
+        <a href="main.html"><div id="title">Pokemans</div></a>
+        <a href="mons.html"><div class="smallnav">Pokemon</div></a>
+        <a href="moves.html"><div class="smallnav">Moves</div></a>
+        <a href="abilities.html"><div class="smallnav">Abilities</div></a>
+    </div> -->
+    <div class="pokemon-list">
+    {%for pokemon in pokemons%}
+        <div class ="pokemon-container">
+            <a href = "/info/{{pokemon.id}}">
+                <img src="{{pokemon.image_url}}" loading ="lazy">
+            </a>
+            <h2>{{pokemon.name}}</h2>
+            {%for type in pokemon.types.all%}
+                {{type.name}}
+            {%endfor%}
+        </div>
+
+        <!-- <h3>Abilities</h3>
+        {%for ability in pokemon.abilities.all%}
+            {{ability.name}}
+        {%endfor%}  -->
         
-        {%for pokemon in pokemons%}
-            <div>
-                <img src="{{pokemon.image_url}}">
-                <h2>{{pokemon.name}}</h2>
-                {%for type in pokemon.types.all%}
-                    <div>{{type.name}}</div>
-                {%endfor%}
-            </div>
-
-            <!-- <h3>Moves</h3>
-            {%for move in ordered_moves.all%} 
-                {%if move.move_learn_method.name == 'level-up'%}
-                <li>
-                    {{move.name}}
-                    {{move.level_learned}}
-                    {{move.move_learn_method.name}}
-                </li>
-                {%endif%}
-            {%endfor%}   
-
-            {%for move in pokemon.moves.all%} 
-                {%if move.move_learn_method.name == 'tutor'%}
-                <li>
-                    {{move.name}}
-                    {{move.level_learned}}
-                    {{move.move_learn_method.name}}
-                </li>
-                {%endif%}
-            {%endfor%}
-
-            {%for move in pokemon.moves.all%}   
-                {%if move.move_learn_method.name == 'egg'%}
-                <li>
-                    {{move.name}}
-                    {{move.level_learned}}
-                    {{move.move_learn_method.name}}
-                </li>
-                {%endif%}
-            {%endfor%}
-
-
-
-
-            <h3>Abilities</h3>
-            {%for ability in pokemon.abilities.all%}
-                {{ability.name}}
-            {%endfor%} -->
-            
         {%endfor%}
- 
+    </div> 
         
     </div>
 </body>

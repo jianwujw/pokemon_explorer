@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href ="/">Back</a>
+    <div class="pokemon-container">
+    <img src="{{pokemon.image_url}}">
+    <br>
+    {{pokemon.name}}
+    <br>
+
+    <h3>Moves</h3>
+
+    {%for move in sortedmoves%} 
+        <li>
+            {{move.level_learned}}
+            {{move.name}}
+            {{move.move_learn_method.name}}
+        </li>
+
+    {%endfor%}
+    </div>
+</body>
+</html>
