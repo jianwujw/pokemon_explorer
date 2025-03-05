@@ -5,6 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    #container{
+        display: flex;
+        position: absolute;
+        top: 20vh;
+        column-gap: 5vh;
+    }
+    .move{
+        height:auto;
+    }
+    .move_container{
+        height: 0vh;
+        overflow:hidden;
+        transition:height 2s;
+        
+    }
+    #container1{
+        height:0vh
+    }
+    #wrapper1:hover #container1{
+        height:40vh;
+        overflow: auto;
+    }
+    li{
+        list-style-type: None;
+    }
+    table{
+        border: 1px solid;
+        min-width: 30vh;
+
+    }
+    td{
+        text-align: left;
+        padding-left:  5vh;
+
+    }
+
+</style>
 <body>
     <a href ="/">Back</a>
     <div class="pokemon-container">
@@ -12,17 +50,46 @@
     <br>
     {{pokemon.name}}
     <br>
-
+    </div>
     <h3>Moves</h3>
-
-    {%for move in sortedmoves%} 
-        <li>
-            {{move.level_learned}}
-            {{move.name}}
-            {{move.move_learn_method.name}}
-        </li>
-
-    {%endfor%}
+    <div id="container" >
+        <div>
+            <h3>Level-Up</h3> 
+            <div class> 
+            <br>
+            
+            <table>
+            <tr>
+                <th>Level</th>
+                <th>Name</th>
+            </tr>
+        {%for move in levelup%}
+                        
+                <tr>                        
+                <td>{{move.level_learned}}</td>
+                <td>{{move.name}}</td>                      
+                </tr>
+                            
+        {%endfor%}  
+    </table>
+        </div>
+    </div>
+        <div id="wrapper1">
+        <h3>Machine / Tutor / Egg</h3>
+        <div class="move_container" id="container1"> 
+           
+            Level | Name | Learned By 
+        {%for move in machine_tutor_egg%}
+                             
+                <li>                        
+                {{move.level_learned}} 
+                {{move.name}} 
+                {{move.move_learn_method.name}}                      
+                </li>  
+                             
+        {%endfor%}  
+        </div>
+        </div>  
     </div>
 </body>
 </html>
