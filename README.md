@@ -1,16 +1,9 @@
-## Digital Library
-A Django-based digital library.
+## Pokémon Explorer
+A Django app to explore Pokémon data.
 
-### Book Catalog / Home Page
-![DL_1](https://github.com/user-attachments/assets/0449af79-f5cc-4387-a3b4-bb6f354c2fb9)
-
-### Search
-![DL_2](https://github.com/user-attachments/assets/f4e321d3-bdfb-45ff-800e-b1b2646e11af)
-
-### Book Overview
-![DL_3](https://github.com/user-attachments/assets/4fe080b0-21e1-4617-97f4-e2dc12beac76)
-
-### Reading View
-![DL_4](https://github.com/user-attachments/assets/5f8340f5-a06b-472a-a7d5-5a3d0cb03848)
+### Homepage
+![PE_1](https://github.com/user-attachments/assets/fe80c356-f964-4180-a827-d83d159a6eb1)
 
 
+### Pokémon Details
+![PE_2](https://github.com/user-attachments/assets/ac4a7922-f652-4717-b6ec-2cf7499184cf)
